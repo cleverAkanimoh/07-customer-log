@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en-us">
+	<head>
+		<meta charset="utf-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta
+			name="description"
+			content="Vanilla javascript portfolio project"
+		/>
+		<meta name="keywords" content="" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>Clever Akanimoh - Customer Log</title>
+		<link rel="icon" href="favicon.ico" />
+		<link
+			rel="apple-touch-icon"
+			sizes="180x180"
+			href="apple-touch-icon.png"
+		/>
+		<link
+			rel="icon"
+			type="image/png"
+			sizes="32x32"
+			href="favicon-32x32.png"
+		/>
+		<link
+			rel="icon"
+			type="image/png"
+			sizes="16x16"
+			href="favicon-16x16.png"
+		/>
+		<link rel="stylesheet" href="style.css" />
+	</head>
+
+	<body>
+		<main class="fullwidth">
+			<img
+				src="codecleverly.png"
+				alt="Logo"
+				class="main-logo"
+				srcset=""
+				width="70"
+			/>
+
+			<form action="" class="search-form">
+				<input
+					type="search"
+					name="search-input"
+					id="search-input"
+					placeholder="Search"
+				/>
+			</form>
+
+			<h1>Customer Entry Form</h1>
+
+			<form action="" class="form">
+				<label for="customerName"
+					>Customer Name <br />
+					<input
+						name="customerName"
+						id="customerName"
+						type="text"
+						class="msg"
+						placeholder="Enter customer's Name here..."
+				/></label>
+
+				<label for="customerPhone"
+					>Customer Phone Number <br />
+					<input
+						name="customerPhone"
+						id="customerPhone"
+						type="text"
+						class="msg"
+						placeholder="Enter customer's phone number here..."
+				/></label>
+				<label for="customerAccount"
+					>Customer Account Number <br />
+					<input
+						name="customerAccount"
+						id="customerAccount"
+						type="text"
+						class="msg"
+						placeholder="Enter customer's account number here..."
+				/></label>
+				<input
+					type="submit"
+					class="add"
+					value="+"
+					title="add to list"
+				/>
+			</form>
+
+			<footer>made <em>cleverly</em> || 2022</footer>
+		</main>
+
+		<nav>
+			<img src="codecleverly.png" class="logo" srcset="" width="90" />
+			<form action="" class="search-form responsive">
+				<input
+					type="search"
+					name="search-input"
+					id="search-input"
+					placeholder="Search"
+				/>
+			</form>
+			<label for="checkk"
+				><div class="hamm-div">
+					<input type="checkbox" name="checkk" id="checkk" />
+					<div class="hamm top"></div>
+					<div class="hamm mid"></div>
+					<div class="hamm last"></div></div
+			></label>
+		</nav>
+
+		<div class="container">
+			<form action="" class="select-form">
+				<div class="select">
+					<select name="entries" class="filter-entry">
+						<option value="all">All</option>
+						<option value="completed">Completed</option>
+						<option value="uncompleted">UnCompleted</option>
+					</select>
+				</div>
+			</form>
+
+			<h2>Customer Log</h2>
+			<table class="data-table">
+				<tr class="heading-table">
+					<th>S/N</th>
+					<th>Customer Name</th>
+					<th>Customer Phone Number</th>
+					<th>Account Number</th>
+					<th>Date created</th>
+				</tr>
+			</table>
+		</div>
+
+		<script src="app.js" async></script>
+	</body>
+</html>

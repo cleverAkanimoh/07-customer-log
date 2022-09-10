@@ -1,0 +1,319 @@
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	-webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+}
+
+@keyframes rotateTop {
+	from {
+		transform: rotate(0deg);
+		margin-bottom: 5px;
+	}
+	50% {
+		transform: rotate(360deg);
+	}
+	to {
+		transform: rotate(45deg);
+		margin-top: 6px;
+	}
+}
+
+@keyframes rotateBottom {
+	0% {
+		transform: rotate(0deg);
+		margin-bottom: 5px;
+	}
+	50% {
+		transform: rotate(-360deg);
+	}
+	100% {
+		transform: rotate(-45deg);
+		margin-top: -9px;
+	}
+}
+
+body {
+	background-color: black;
+	color: white;
+	font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
+		sans-serif;
+}
+
+body::-webkit-scrollbar {
+	display: none;
+}
+
+.fullwidth {
+	transition: all 0.6s ease;
+	display: block;
+	position: fixed;
+	top: 0;
+	left: 0;
+	height: 100%;
+	width: 60%;
+	padding: 20px 10px;
+	border-right: 2px solid white;
+	background: black;
+	transform: translate(-100%);
+	z-index: 7;
+}
+
+.main-display {
+	position: fixed;
+	top: 0;
+	left: 0;
+	height: 100%;
+	width: 55%;
+	padding: 20px 10px;
+	border-right: 2px solid white;
+	background-color: black;
+	z-index: 7;
+	transition: all 0.6s ease;
+}
+
+nav {
+	display: inline;
+	position: fixed;
+	top: 0;
+	width: 100%;
+	height: 70px;
+	background: black;
+	padding: 1rem 1.2rem;
+	z-index: 5;
+}
+
+.logo {
+	float: left;
+	margin-top: 3px;
+}
+
+.responsive {
+	width: 40%;
+	float: left;
+	margin-top: -5px;
+	height: auto;
+}
+
+nav div.hamm-div {
+	float: right;
+	padding: 0.2rem;
+	cursor: pointer;
+	margin-top: 10px;
+}
+
+nav div.hamm {
+	background-color: white;
+	width: 30px;
+	margin-bottom: 5px;
+	height: 4.5px;
+	pointer-events: none;
+	border: 0;
+}
+
+#checkk {
+	display: none;
+}
+
+#checkk:checked ~ .hamm.top {
+	animation: rotateTop 0.6s forwards;
+}
+#checkk:checked ~ .hamm.mid {
+	animation: rotateBottom 0.6s forwards;
+}
+#checkk:checked ~ .hamm.last {
+	animation: rotateBottom 0.6s forwards;
+}
+
+.fall {
+	transform: translateX(5rem);
+	opacity: 0.4;
+}
+
+h1 {
+	font-size: 1.6rem;
+	color: green;
+}
+
+h1,
+form {
+	min-height: 10vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+form {
+	font-size: 1.1rem;
+	z-index: 3;
+	display: grid;
+	grid-template-columns: repeat(1, 1fr);
+	margin-left: 4%;
+	grid-gap: 20px 0;
+}
+
+input::placeholder {
+	color: blue;
+}
+
+form input[type="text"],
+input[type="search"] {
+	padding: 0.55rem;
+	border: none;
+	border-radius: 0.3rem;
+	background-color: white;
+	width: 100%;
+}
+
+form input[type="text"]:focus,
+input[type="search"]:focus {
+	outline: 0;
+	border: 2px solid blue;
+}
+
+[type="submit"] {
+	width: 50%;
+	background: green;
+	color: white;
+	font-size: 1.2rem;
+	font-weight: bolder;
+	padding: 0.3rem 0;
+	cursor: pointer;
+	border: none;
+	border-radius: 0 0.3rem;
+	transition: all 0.3s ease-in;
+	margin-left: 20%;
+}
+
+[type="submit"]:hover {
+	background: white;
+	color: green;
+}
+
+[type="submit"]:focus {
+	border: 2.5px solid green;
+	padding: 0.22rem 0.3rem;
+}
+
+.container {
+	width: 100%;
+	position: relative;
+	overflow-x: hidden;
+	margin-top: 17vh;
+}
+
+div.select {
+	padding-right: 5px;
+	position: absolute;
+	overflow: hidden;
+	right: 0;
+}
+
+div.select::after {
+	content: "Filter";
+	background: green;
+	padding: 0.55rem;
+	pointer-events: none;
+	border-radius: 0 0.3rem 0.3rem 0;
+}
+
+select {
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+	outline: none;
+	border: none;
+	color: green;
+	width: 8.5rem;
+	cursor: pointer;
+	padding: 0.55rem;
+	border-radius: 0.3rem;
+}
+
+.container h2 {
+	position: relative;
+}
+
+table {
+	position: relative;
+	width: 100%;
+	overflow-x: auto;
+	padding: 1rem;
+}
+
+table th {
+	text-align: center;
+	padding: 1rem 0rem;
+	color: green;
+}
+
+table tr.table-row:nth-child(odd) {
+	background-color: #333;
+}
+
+@keyframes underline {
+	from {
+		transform: translate(-100%);
+	}
+	to {
+		transform: translate(0%);
+	}
+}
+
+table td {
+	text-align: center;
+	border-bottom: 1px solid dodgerblue;
+	/* transition: all 0.6s; */
+	animation: underline 0.5s;
+}
+
+footer {
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+	text-align: center;
+	padding:0 0 1rem;
+}
+
+@media screen and (min-width: 1036px) {
+	nav {
+		display: none;
+	}
+	.fullwidth,
+	.main-display {
+		display: block;
+		position: fixed;
+		top: 0;
+		left: 0;
+		height: 100%;
+		width: 20%;
+		padding: 20px 10px;
+		border-right: 2px solid white;
+		transform: translate(0%);
+		transition: none;
+	}
+
+	.container {
+		position: absolute;
+		top: 0;
+		right: 0;
+		width: 80%;
+		margin-top: 0vh;
+		padding: 0.7rem;
+	}
+
+	.container h2 {
+		text-align: center;
+		padding: 3rem 0;
+		font-size: 2rem;
+	}
+
+	div.select {
+		padding-right: 5px;
+		position: absolute;
+		overflow: hidden;
+		top: 3%;
+		right: 3%;
+		z-index: 6;
+	}
+}
