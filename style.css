@@ -5,10 +5,20 @@
 	-webkit-tap-highlight-color: rgba(255, 255, 255, 0);
 }
 
+@keyframes hamm-normal {
+	from {
+		margin-bottom: -4px;
+	}
+	to {
+		margin-bottom: 4px;
+		transform: rotate(360deg);
+	}
+}
+
 @keyframes rotateTop {
 	from {
 		transform: rotate(0deg);
-		margin-bottom: 5px;
+		margin-bottom: 4px;
 	}
 	50% {
 		transform: rotate(360deg);
@@ -22,14 +32,14 @@
 @keyframes rotateBottom {
 	0% {
 		transform: rotate(0deg);
-		margin-bottom: 5px;
+		margin-bottom: 4px;
 	}
 	50% {
 		transform: rotate(-360deg);
 	}
 	100% {
 		transform: rotate(-45deg);
-		margin-top: -9px;
+		margin-top: -8px;
 	}
 }
 
@@ -43,10 +53,18 @@ body {
 body::-webkit-scrollbar {
 	display: none;
 }
+.search-not-found {
+	padding: 1rem;
+	font-size: 1.15rem;
+	display: none;
+}
+
+.search-hidden {
+	display: none;
+}
 
 .fullwidth {
 	transition: all 0.6s ease;
-	display: block;
 	position: fixed;
 	top: 0;
 	left: 0;
@@ -64,12 +82,16 @@ body::-webkit-scrollbar {
 	top: 0;
 	left: 0;
 	height: 100%;
-	width: 55%;
+	width: 257px;
 	padding: 20px 10px;
-	border-right: 2px solid white;
+	border-right: 1px solid white;
 	background-color: black;
 	z-index: 7;
 	transition: all 0.6s ease;
+}
+
+.completed .check-btn {
+	opacity: 0.6;
 }
 
 nav {
@@ -100,15 +122,17 @@ nav div.hamm-div {
 	padding: 0.2rem;
 	cursor: pointer;
 	margin-top: 10px;
+	animation: hamm-normal 0.6s;
 }
 
 nav div.hamm {
-	background-color: white;
-	width: 30px;
-	margin-bottom: 5px;
-	height: 4.5px;
+	background: white;
+	width: 23px;
+	margin-bottom: 4px;
+	height: 4px;
 	pointer-events: none;
 	border: 0;
+	animation: hamm-normal 0.6s;
 }
 
 #checkk {
@@ -154,10 +178,11 @@ form {
 
 input::placeholder {
 	color: blue;
+	font-size: 0.9rem;
 }
 
 form input[type="text"],
-input[type="search"] {
+input[type="search"], .signup-main input  {
 	padding: 0.55rem;
 	border: none;
 	border-radius: 0.3rem;
@@ -166,28 +191,28 @@ input[type="search"] {
 }
 
 form input[type="text"]:focus,
-input[type="search"]:focus {
+input[type="search"]:focus, .signup-main input:focus {
 	outline: 0;
 	border: 2px solid blue;
 }
 
 [type="submit"] {
 	width: 50%;
-	background: green;
-	color: white;
+	background: green !important;
+	color: white ;
 	font-size: 1.2rem;
-	font-weight: bolder;
-	padding: 0.3rem 0;
+	font-weight: bold;
+	padding: 0.3rem 0 !important;
 	cursor: pointer;
 	border: none;
 	border-radius: 0 0.3rem;
-	transition: all 0.3s ease-in;
+	transition: all 0.5s ease;
 	margin-left: 20%;
 }
 
 [type="submit"]:hover {
-	background: white;
-	color: green;
+	background: white !important;
+	color: green !important;
 }
 
 [type="submit"]:focus {
@@ -224,7 +249,7 @@ select {
 	outline: none;
 	border: none;
 	color: green;
-	width: 8.5rem;
+	width: 8rem;
 	cursor: pointer;
 	padding: 0.55rem;
 	border-radius: 0.3rem;
@@ -232,6 +257,7 @@ select {
 
 .container h2 {
 	position: relative;
+	text-align: center;
 }
 
 table {
@@ -239,6 +265,10 @@ table {
 	width: 100%;
 	overflow-x: auto;
 	padding: 1rem;
+}
+
+.table-hidden {
+	display: none;
 }
 
 table th {
@@ -263,8 +293,32 @@ table tr.table-row:nth-child(odd) {
 table td {
 	text-align: center;
 	border-bottom: 1px solid dodgerblue;
-	/* transition: all 0.6s; */
 	animation: underline 0.5s;
+}
+
+.logout {
+	position: absolute;
+	bottom: 12%;
+	width: fit-content;
+	padding: 0.7rem 1rem;
+	border: 1px solid green;
+	box-shadow: 1px 1px 1px 1px black;
+}
+
+.logout:link, .logout:visited{
+	color: green;
+	font-weight: bold;
+	border-radius: 0.55rem;
+	text-decoration: none;
+}
+
+.logout:hover, .logout:active{
+	color: white;
+	background: green;
+	font-weight: bold;
+	text-decoration: none;
+	border-radius: 0.75rem;
+	transition: all 0.5s;
 }
 
 footer {
@@ -272,7 +326,7 @@ footer {
 	bottom: 0;
 	width: 100%;
 	text-align: center;
-	padding:0 0 1rem;
+	padding: 0 0 1rem;
 }
 
 @media screen and (min-width: 1036px) {
@@ -281,7 +335,6 @@ footer {
 	}
 	.fullwidth,
 	.main-display {
-		display: block;
 		position: fixed;
 		top: 0;
 		left: 0;
@@ -303,7 +356,6 @@ footer {
 	}
 
 	.container h2 {
-		text-align: center;
 		padding: 3rem 0;
 		font-size: 2rem;
 	}
@@ -316,4 +368,60 @@ footer {
 		right: 3%;
 		z-index: 6;
 	}
+}
+
+
+.signup-main {
+	position: absolute;
+	top: 40%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
+.signup-main h1 {
+	font-size: 2rem;
+	padding-bottom: 30px;
+}
+
+.signup-main input {
+	height: 35px;
+	width: 350px;
+}
+
+.signup-main label {
+	width: fit-content;
+}
+
+#checktoggle{
+	width: 15px;
+	height: 20px;
+	outline: 0;
+	border: 0;
+	transform: translate(0%, 10%);
+}
+
+.sign-submit {
+	transform: translate(0%, 20%);
+	margin: 0;
+}
+
+.signup-main p {
+	padding: 1.1rem 0.8rem;
+	font-size: 1.1rem;
+}
+
+.signup-main p a:link, .signup-main p a:visited {
+	color: green;
+	font-weight: 500;
+	text-decoration: none;
+}
+
+.signup-main p a:hover, .signup-main p a:active {
+	text-decoration: underline;
+}
+
+.error-msg {
+	color: rgb(226, 61, 61);
+	font-weight: 500;
+	text-align: center;
 }

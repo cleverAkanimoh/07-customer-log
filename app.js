@@ -3,9 +3,8 @@ const table = document.querySelector('.data-table');
 const cName = document.querySelector('#customerName');
 const cPhone = document.querySelector('#customerPhone');
 const cAccount = document.querySelector('#customerAccount');
-const form = document.querySelector('.form');
-const searchForm = document.querySelector('.search-form');
-const searchInput = document.querySelector('#search-input');
+const form = document.forms;
+const searchInputs = document.querySelectorAll('#search-input');
 const filterOption = document.querySelector('.filter-entry');
 const hammDiv = document.querySelector('.hamm-div');
 const mainSideBar = document.querySelector('.fullwidth');
@@ -33,13 +32,14 @@ hammDiv.onclick = hammClick;
 window.addEventListener('DOMContentLoaded', hammClick);
 
 // form
-form.addEventListener('submit', (e) => {
-    e.preventDefault();
-}, false);
 
-searchForm.addEventListener('submit', (e) => {
-    e.preventDefault();
-}, false);
+for (let i = 0; i < form.length; i++) {
+    form[i].addEventListener('submit', (e) => {
+        e.preventDefault();
+    }, false);
+}
+
+//creating new elements
 
 createEl_btn.onclick = () => {
 
@@ -99,7 +99,7 @@ createEl_btn.onclick = () => {
 
         let tableData2 = document.createElement('td');
         tableData2.className = 'table-data';
-        if (cPhoneValue.startsWith('0')){
+        if (cPhoneValue.startsWith('0')) {
             cPhoneValue = cPhoneValue.replace('0', '+234 ');
         }
         tableData2.textContent = cPhoneValue;
@@ -132,25 +132,21 @@ createEl_btn.onclick = () => {
         del.textContent = 'x';
         tableRow.appendChild(del);
 
-        saveLocalEntries(cName.value);
-        saveLocalEntries(cPhone.value);
-        saveLocalEntries(cAccount.value);
-        saveLocalEntries(dateCreated);
-
-        // cName.value = "";
-        // cPhone.value = "";
-        // cAccount.value = "";
+        cName.value = "";
+        cPhone.value = "";
+        cAccount.value = "";
     }
 }
 
-table.onclick = (e) => {
+// deleting and adding filter options
+
+table.ondblclick = (e) => {
 
     let item = e.target;
     let entry = item.parentElement;
 
     if (item.classList[0] === 'del-btn') {
         entry.classList.add('fall');
-        // removeLocalEntries(entry);
         setTimeout(
             () => {
                 entry.remove();
@@ -163,148 +159,61 @@ table.onclick = (e) => {
     };
 }
 
+// search functionality
 
-// search form
+searchInputs.forEach((input) => {
+    input.oninput = () => {
+        let tableValue = document.querySelectorAll('.table-row');
+        let noSearchResult = document.querySelector('.search-not-found');
+        let searchQuery = input.value;
 
-// searchInput.oninput = () => {
-//     let searchInputValue = searchInput.value;
-//     if (searchInputValue === '') {
-//         window.location.reload();
-//     } else {
-//         let searchResultPosition = cNameValue.search(searchInputValue);
-//         table.innerHTML = searchResultPosition;
-//     }
-// }
+        for (let i = 0; i < tableValue.length; i++) {
+            if (tableValue[i].textContent.toUpperCase().includes(searchQuery.toUpperCase())) {
+                tableValue[i].classList.remove('search-hidden');
+                noSearchResult.style.display = 'none';
+                table.classList.remove('table-hidden');
+
+            } else if (!tableValue[i].textContent.toUpperCase().includes(searchQuery.toUpperCase())) {
+                tableValue[i].classList.add('search-hidden');
+                noSearchResult.style.display = 'block';
+                table.classList.add('table-hidden');
+            } else {
+                tableValue[i].classList.add('search-hidden');
+                noSearchResult.style.display = 'none';
+                table.classList.remove('table-hidden');
+
+            };
+        }
+    }
+});
+
+// filter functionality
 
 filterOption.onclick = (e) => {
-    let entries = createEl_btn.childNodes;
+    let tableRow = document.querySelectorAll('.table-row');
 
-    entries.forEach((entry) => {
+    console.log(tableRow);
+    console.log(e.target.value)
+
+    tableRow.forEach((entry) => {
         switch (e.target.value) {
             case 'all':
-                entry.style.display = 'block';
+                entry.classList.remove('table-hidden');
                 break;
             case "completed":
                 if (entry.classList.contains('completed')) {
-                    entry.style.display = 'block';
+                    entry.classList.remove('table-hidden');
                 } else {
-                    entry.style.display = 'none';
+                    entry.classList.add('table-hidden');
                 }
                 break;
             case "uncompleted":
                 if (!entry.classList.contains('completed')) {
-                    entry.style.display = 'flex';
+                    entry.classList.remove('table-hidden');
                 } else {
-                    entry.style.display = 'none';
+                    entry.classList.add('table-hidden');
                 }
                 break;
         }
     });
 }
-
-const saveLocalEntries = (entry1) => {
-    //* check if already exits...
-    let entries;
-    if (localStorage.getItem('entries') === null) {
-        entries = [];
-    } else {
-        entries = JSON.parse(localStorage.getItem('entries'));
-    }
-
-    entries.push(entry1);
-    localStorage.setItem('entries', JSON.stringify(entries));
-}
-
-// const getEntries = () => {
-//     //* check if already exits...
-//     let entries;
-//     if (localStorage.getItem('entries') === null) {
-//         entries = [];
-//     } else {
-//         entries = JSON.parse(localStorage.getItem('entries'));
-//     }
-//     entries.forEach((entry) => {
-//         // div element todo__wrapper
-
-//         let todoDiv = document.createElement('div');
-//         todoDiv.className = 'entry';
-//         el.appendChild(todoDiv);
-
-//         // li element
-
-//         let todoli = document.createElement('li');
-//         todoli.className = 'entry-item';
-//         todoli.textContent = entry;
-//         todoDiv.appendChild(todoli);
-
-//         // create check button
-
-//         let check = document.createElement('button');
-//         check.type = 'checkbox';
-//         check.className = 'check-btn';
-//         check.title = 'check item';
-//         check.innerHTML = '&check;';
-//         todoDiv.appendChild(check);
-
-//         // create delete button
-//         let del = document.createElement('button');
-//         del.className = 'del-btn';
-//         del.title = 'remove from list';
-//         del.textContent = 'x';
-//         todoDiv.appendChild(del);
-//     });
-// }
-// document.addEventListener('DOMContentLoaded', getEntries);
-
-// const removeLocalentries = (entry) => {
-//     let entries;
-//     if (localStorage.getItem('entries') === null) {
-//         entries = [];
-//     } else {
-//         entries = JSON.parse(localStorage.getItem('entries'));
-//     }
-
-//     const todoIndex = entry.children[0].innerText;
-//     entries.splice(entries.indexOf(todoIndex), 1);
-//     localStorage.setItem("entries", JSON.stringify(entries));
-// }
-
-//! cookies here
-
-// function setCookie(cname,cvalue,exdays) {
-//   const d = new Date();
-//   d.setTime(d.getTime() + (exdays*24*60*60*1000));
-//   let expires = "expires=" + d.toUTCString();
-//   document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
-// }
-
-// function getCookie(cname) {
-//   let name = cname + "=";
-//   let decodedCookie = decodeURIComponent(document.cookie);
-//   let ca = decodedCookie.split(';');
-//   for(let i = 0; i < ca.length; i++) {
-//     let c = ca[i];
-//     while (c.charAt(0) == ' ') {
-//       c = c.substring(1);
-//     }
-//     if (c.indexOf(name) == 0) {
-//       return c.substring(name.length, c.length);
-//     }
-//   }
-//   return "";
-// }
-
-// function checkCookie() {
-//   let user = getCookie("username");
-//   if (user != "") {
-//     alert("Welcome again " + user);
-//   } else {
-//      user = prompt("Please enter your name:","");
-//      if (user != "" && user != null) {
-//        setCookie("username", user, 30);
-//      }
-//   }
-// };
-// window.onload = () => {
-//     checkCookie();
-// }
